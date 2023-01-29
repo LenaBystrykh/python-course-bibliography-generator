@@ -42,7 +42,14 @@ class Renderer:
 
         for row in self.rows:
             # добавление источника
-            document.add_paragraph(row, style="List Number")
+            if 'ITALIC' in row:
+                parts = row.split('ITALIC')
+                part = document.add_paragraph(parts[0], style="List Number")
+                part.add_run(parts[1]).italic = True
+                part.add_run(parts[2])
+
+            else:
+                document.add_paragraph(row, style="List Number")
 
         # сохранение файла Word
         document.save(path)

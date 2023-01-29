@@ -78,3 +78,54 @@ class ArticlesCollectionModel(BaseModel):
     publishing_house: str
     year: int = Field(..., gt=0)
     pages: str
+
+
+class JournalArticleModel(BaseModel):
+    """
+    Модель статьи из журнала:
+
+    .. code-block::
+
+        JournalArticleModel(
+            authors="Иванов И.М., Петров С.Н.",
+            article_title="Наука как искусство",
+            journal_title="Образование и наука",
+            year=2020,
+            release=10,
+            pages="25-30",
+        )
+    """
+
+    authors: str
+    article_title: str
+    journal_title: str
+    year: int = Field(..., gt=0)
+    release: int = Field(..., gt=0)
+    pages: str
+
+class DissertationModel(BaseModel):
+    """
+    Модель диссертации:
+
+    .. code-block::
+
+        DissertationModel(
+            author="Иванов И.М.",
+            title="Наука как искусство",
+            degree="д-р.",
+            speciality="экон.",
+            code="01.01.01",
+            city="СПб.",
+            year=2020,
+            pages=199,
+        )
+    """
+
+    author: str
+    title: str
+    degree: str
+    speciality: str
+    code: str
+    city: str
+    year: int = Field(..., gt=0)
+    pages: int = Field(..., gt=0)
