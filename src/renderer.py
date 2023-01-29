@@ -42,8 +42,8 @@ class Renderer:
 
         for row in self.rows:
             # добавление источника
-            if 'ITALIC' in row:
-                parts = row.split('ITALIC')
+            if "ITALIC" in row:
+                parts = row.split("ITALIC")
                 part = document.add_paragraph(parts[0], style="List Number")
                 part.add_run(parts[1]).italic = True
                 part.add_run(parts[2])

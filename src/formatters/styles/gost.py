@@ -5,7 +5,13 @@ from string import Template
 
 from pydantic import BaseModel
 
-from formatters.models import BookModel, InternetResourceModel, ArticlesCollectionModel, JournalArticleModel, DissertationModel
+from formatters.models import (
+    BookModel,
+    InternetResourceModel,
+    ArticlesCollectionModel,
+    JournalArticleModel,
+    DissertationModel,
+)
 from formatters.styles.base import BaseCitationStyle
 from logger import get_logger
 
@@ -102,9 +108,10 @@ class GOSTCollectionArticle(BaseCitationStyle):
             pages=self.data.pages,
         )
 
+
 class GOSTJournalArticle(BaseCitationStyle):
     """
-        Форматирование для статьи из журнала.
+    Форматирование для статьи из журнала.
     """
 
     data: JournalArticleModel
@@ -114,9 +121,12 @@ class GOSTJournalArticle(BaseCitationStyle):
         return Template(
             "$author $article_title / $authors // $journal_title. – $year. – № $release. – С. $pages."
         )
+
     def substitute(self) -> str:
 
-        logger.info('Форматирование статьи из журнала "%s" ...', self.data.article_title)
+        logger.info(
+            'Форматирование статьи из журнала "%s" ...', self.data.article_title
+        )
 
         return self.template.substitute(
             author=self.get_author(),
@@ -134,12 +144,18 @@ class GOSTJournalArticle(BaseCitationStyle):
 
         :return: Информация о первом авторе.
         """
-        return self.data.authors.split(',')[0] if "," in self.data.authors else self.data.authors
+        return (
+            self.data.authors.split(",")[0]
+            if "," in self.data.authors
+            else self.data.authors
+        )
+
 
 class GOSTDissertation(BaseCitationStyle):
     """
-        Форматирование для диссертации.
+    Форматирование для диссертации.
     """
+
     data: DissertationModel
 
     @property
@@ -161,6 +177,8 @@ class GOSTDissertation(BaseCitationStyle):
             year=self.data.year,
             pages=self.data.pages,
         )
+
+
 class GOSTCitationFormatter:
     """
     Базовый класс для итогового форматирования списка источников.
@@ -195,5 +213,3 @@ class GOSTCitationFormatter:
         """
 
         return sorted(self.formatted_items, key=lambda item: item.formatted)
-
-

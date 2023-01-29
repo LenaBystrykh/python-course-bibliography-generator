@@ -3,8 +3,20 @@
 """
 
 from formatters.base import BaseCitationFormatter
-from formatters.models import BookModel, InternetResourceModel, ArticlesCollectionModel, JournalArticleModel, DissertationModel
-from formatters.styles.gost import GOSTBook, GOSTInternetResource, GOSTCollectionArticle, GOSTJournalArticle, GOSTDissertation
+from formatters.models import (
+    BookModel,
+    InternetResourceModel,
+    ArticlesCollectionModel,
+    JournalArticleModel,
+    DissertationModel,
+)
+from formatters.styles.gost import (
+    GOSTBook,
+    GOSTInternetResource,
+    GOSTCollectionArticle,
+    GOSTJournalArticle,
+    GOSTDissertation,
+)
 
 
 class TestGOST:
@@ -74,13 +86,12 @@ class TestGOST:
         model = GOSTJournalArticle(journal_article_model_fixture)
 
         assert (
-            model.formatted
-            == "Иванов И.М. Наука как искусство / Иванов И.М., Петров С.Н. // Образование и наука. – 2020. – № 10. – С. 25-30."
+            model.formatted ==
+            "Иванов И.М. Наука как искусство / Иванов И.М., Петров С.Н. //" +
+            " Образование и наука. – 2020. – № 10. – С. 25-30."
         )
 
-    def test_dissertation(
-        self, dissertation_model_fixture: DissertationModel
-    ) -> None:
+    def test_dissertation(self, dissertation_model_fixture: DissertationModel) -> None:
         """
         Тестирование форматирования диссертации.
 
@@ -94,7 +105,6 @@ class TestGOST:
             model.formatted
             == "Иванов И.М. Наука как искусство: канд. экон. наук: 01.01.01 / Иванов И.М. – СПб., 2020. – 199 с."
         )
-
 
     def test_citation_formatter(
         self,
@@ -125,8 +135,8 @@ class TestGOST:
         result = BaseCitationFormatter(models).format()
 
         # тестирование сортировки списка источников
-        assert result[0] == models[4]
-        assert result[1] == models[3]
+        assert result[0] == models[3]
+        assert result[1] == models[4]
         assert result[2] == models[2]
         assert result[3] == models[0]
         assert result[4] == models[1]

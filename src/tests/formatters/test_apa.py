@@ -44,7 +44,6 @@ class TestAPA:
             == "Ведомости. (01.01.2021). Наука как искусство. https://www.vedomosti.ru"
         )
 
-
     def test_citation_formatter(
         self,
         book_model_fixture: BookModel,
@@ -67,4 +66,3 @@ class TestAPA:
         # тестирование сортировки списка источников
         assert result[0] == models[1]
         assert result[1] == models[0]
-

@@ -23,9 +23,7 @@ class APABook(BaseCitationStyle):
 
     @property
     def template(self) -> Template:
-        return Template(
-            "$authors ($year). ITALIC$title.ITALIC $publishing_house."
-        )
+        return Template("$authors ($year). ITALIC$title.ITALIC $publishing_house.")
 
     def substitute(self) -> str:
 
@@ -44,11 +42,11 @@ class APABook(BaseCitationStyle):
 
         :return: Информация об авторах.
         """
-        authors = self.data.authors.split(',')
-        result = ''
+        authors = self.data.authors.split(",")
+        result = ""
         if len(authors) > 1:
             for author in authors:
-                result += author + ' & '
+                result += author + " & "
             result = result[:-3]
         else:
             result = self.data.authors
@@ -65,9 +63,7 @@ class APAInternetResource(BaseCitationStyle):
 
     @property
     def template(self) -> Template:
-        return Template(
-            "$website. ($access_date). ITALIC$article.ITALIC $link"
-        )
+        return Template("$website. ($access_date). ITALIC$article.ITALIC $link")
 
     def substitute(self) -> str:
 
@@ -79,6 +75,7 @@ class APAInternetResource(BaseCitationStyle):
             link=self.data.link,
             access_date=self.data.access_date,
         )
+
 
 class APACitationFormatter:
     """
@@ -99,7 +96,7 @@ class APACitationFormatter:
 
         formatted_items = []
         for model in models:
-            if self.formatters_map.get(type(model).__name__) != None:
+            if self.formatters_map.get(type(model).__name__) is not None:
                 formatted_items.append(self.formatters_map.get(type(model).__name__)(model))  # type: ignore
 
         self.formatted_items = formatted_items
@@ -112,5 +109,3 @@ class APACitationFormatter:
         """
 
         return sorted(self.formatted_items, key=lambda item: item.formatted)
-
-

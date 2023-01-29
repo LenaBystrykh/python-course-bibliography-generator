@@ -103,6 +103,7 @@ class JournalArticleModel(BaseModel):
     release: int = Field(..., gt=0)
     pages: str
 
+
 class DissertationModel(BaseModel):
     """
     Модель диссертации:
@@ -112,7 +113,7 @@ class DissertationModel(BaseModel):
         DissertationModel(
             author="Иванов И.М.",
             title="Наука как искусство",
-            degree="д-р.",
+            degree="канд.",
             speciality="экон.",
             code="01.01.01",
             city="СПб.",
